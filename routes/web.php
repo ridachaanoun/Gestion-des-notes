@@ -19,6 +19,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
+Route::get('/notes/{note}/edit', [NoteController::class, 'edit'])->name('notes.edit'); // Define the edit route here
+
 
 Route::get('/create_categories', [CategoryController::class, 'create'])->name('create_categories');
 Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
@@ -27,3 +29,4 @@ Route::get('/notes', [NoteController::class, 'index'])->name('notes');
 Route::delete('/notes/{note}', [NoteController::class, 'destroy'])->name('notes.destroy');
 
 require __DIR__.'/auth.php';
+
