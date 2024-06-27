@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\Note;
 use App\Models\Category;
@@ -28,22 +28,20 @@ class NoteController extends Controller
 
     public function index(Request $request)
     {
-        $user_id = auth()->id();
-        $categories = Category::where('user_id', $user_id)->get();
+        $user_id = Auth::id();
+        $query = Note::where('user_id', $user_id)->with('category');
 
-        $category_id = $request->input('category_id');
-        $title = $request->input('title');
+        if ($request->filled('category')) {
+            $query->where('category_id', $request->category);
+        }
 
-        $notes = Note::where('user_id', $user_id)
-            ->when($category_id, function ($query, $category_id) {
-                return $query->where('category_id', $category_id);
-            })
-            ->when($title, function ($query, $title) {
-                return $query->where('title', 'like', '%' . $title . '%');
-            })
-            ->get();
+        if ($request->filled('search')) {
+            $query->where('title', 'like', '%' . $request->search . '%');
+        }
 
-        return view('notes.notes', compact('notes', 'categories', 'category_id', 'title'));
+        $notes = $query->paginate(9); // 9 notes per page
+
+        return view('notes.notes', compact('notes'));
     }
 
     public function destroy(Note $note)
