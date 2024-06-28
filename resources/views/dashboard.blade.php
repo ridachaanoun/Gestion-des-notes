@@ -15,7 +15,7 @@
         @endif
 
         <!-- Note creation form -->
-        <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 shadow-xl">
+        <div class="bg-white  rounded px-8 pt-6 pb-8 mb-4 shadow-xl">
             <form action="{{ route('notes.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
@@ -45,7 +45,5 @@
             </form>
         </div>
 
-        <!-- Existing dashboard content -->
-        <!-- Add your other dashboard content here -->
     </div>
 </x-app-layout>
