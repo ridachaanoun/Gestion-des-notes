@@ -51,22 +51,47 @@ Ensure you have the following installed:
     ```bash
     npm run dev
     
-Step 2: Set Up Environment Variables
+#### Step 2: Set Up Environment Variables
 1. Copy the .env.example file to .env:
     ```bash
     cp .env.example .env
 2. Configure the database and other environment settings in the .env file.
-3. Generate the application key:
-4. ```bash
-    php artisan key:generate
+.Update the database settings to match your local or remote database configuration:
+    ```bash
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=your_database_name
+    DB_USERNAME=your_database_username
+    DB_PASSWORD=your_database_password
 
-Step 3: Serve the Application
+3. Generate the application key:
+     ```bash
+    php artisan key:generate
+#### Step 3: Migrate the Database
+1. Run migrations to set up your database tables:
+   ```bash
+   php artisan migrate
+#### 2.Import the notesdb.sql file:
+     After running the migrations, import the notesdb.sql file into your database.
+    
+#### Step 4: Serve the Application
 1. Start the Laravel development server:    
     ```bash
     php artisan serve
-By default, the application will be available at http://localhost:8000.
+- By default, the application will be available at http://localhost:8000.
 Getting Started
 
+## Login Information
+
+You can log in with the following test account:
+
+- **Email:** ridachaanoun.ff.2@gmail.com
+- **Password:** 10101010
+
+This account has a lot of notes for demonstration purposes.
+
+> **Note:** Please ensure that you change the password after using the demo account for security reasons.
 ---
 1. Log In
 Open the application and log in using your credentials.
